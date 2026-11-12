@@ -11,35 +11,48 @@ public class App {
         System.out.println("Enter the name of the player: ");
         String name2 = scanner.nextLine();
 
-        Player player1 = new Player(name1);
-        Player player2 = new Player(name2);
+        Player dealer = new Player(name1);
+        Player player = new Player(name2);
 
-        System.out.println("Welcome, " + player1.getPlayer() + " and " + player2.getPlayer());
+        System.out.println("Welcome, " + dealer.getPlayer() + " and " + player.getPlayer());
 
         Deck deck = new Deck();
         deck.shuffle();
 
         for (int i = 0; i < 2; i++) {
-            player1.getHand().deal(deck.deal());
-            player2.getHand().deal(deck.deal());
+            dealer.getHand().deal(deck.deal());
+            player.getHand().deal(deck.deal());
         }
 
-        int value1 = player1.getHand().getValue();
-        int value2 = player2.getHand().getValue();
+        int dealerValue = dealer.getHand().getValue();
+        int playerValue = player.getHand().getValue();
 
-        System.out.println(player1.getPlayer() + "'s hand: " + player1.getHand() + "value: " + value1);
-        System.out.println(player2.getPlayer() + "'s hand: " + player2.getHand() + "value: " + value2);
+        while (dealer.getHand().getValue() < 16) {
+            System.out.println(dealer.getPlayer() + " is hitting!");
+            dealer.getHand().deal(deck.deal());
+        }
 
-        if (value1 > 21 && value2 > 21) {
+        while (player.getHand().getValue() < 16) {
+            System.out.println(player.getPlayer() + " is hitting!");
+            player.getHand().deal(deck.deal());
+        }
+
+        dealerValue = dealer.getHand().getValue();
+        playerValue = player.getHand().getValue();
+
+        System.out.println(dealer.getPlayer() + "'s hand: " + dealer.getHand() + "value: " + dealerValue);
+        System.out.println(player.getPlayer() + "'s hand: " + player.getHand() + "value: " + playerValue);
+
+        if (dealerValue > 21 && playerValue > 21) {
             System.out.println("Both are busted! No winner!");
-        } else if (value1 > 21) {
-            System.out.println(player2.getPlayer() + " is the winner!");
-        } else if (value2 > 21) {
-            System.out.println(player1.getPlayer() + " is the winner!");
-        } else if (value1 > value2) {
-            System.out.println(player1.getPlayer() + " is the winner with " + value1 + " value");
-        } else if (value2 > value1) {
-            System.out.println(player2.getPlayer() + " is the winner with " + value2 + " value");
+        } else if (dealerValue > 21) {
+            System.out.println(player.getPlayer() + " is the winner!");
+        } else if (playerValue > 21) {
+            System.out.println(dealer.getPlayer() + " is the winner!");
+        } else if (dealerValue > playerValue) {
+            System.out.println(dealer.getPlayer() + " is the winner with " + dealerValue + " value");
+        } else if (playerValue > dealerValue) {
+            System.out.println(player.getPlayer() + " is the winner with " + playerValue + " value");
         } else {
             System.out.println("You both are tied!");
         }
