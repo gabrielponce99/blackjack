@@ -27,21 +27,18 @@ public class App {
         int dealerValue = dealer.getHand().getValue();
         int playerValue = player.getHand().getValue();
 
-        while (dealer.getHand().getValue() < 16) {
-            System.out.println(dealer.getPlayer() + " is hitting!");
-            dealer.getHand().deal(deck.deal());
-        }
+        System.out.println(dealer.getPlayer() + "'s hand: " + dealer.getHand() + "value: " + dealerValue);
+        System.out.println(player.getPlayer() + "'s hand: " + player.getHand() + "value: " + playerValue);
+        System.out.println();
 
-        while (player.getHand().getValue() < 16) {
-            System.out.println(player.getPlayer() + " is hitting!");
-            player.getHand().deal(deck.deal());
-        }
+        askToHit(dealer, scanner, deck, player);
 
         dealerValue = dealer.getHand().getValue();
         playerValue = player.getHand().getValue();
 
         System.out.println(dealer.getPlayer() + "'s hand: " + dealer.getHand() + "value: " + dealerValue);
         System.out.println(player.getPlayer() + "'s hand: " + player.getHand() + "value: " + playerValue);
+        System.out.println();
 
         if (dealerValue > 21 && playerValue > 21) {
             System.out.println("Both are busted! No winner!");
@@ -55,6 +52,40 @@ public class App {
             System.out.println(player.getPlayer() + " is the winner with " + playerValue + " value");
         } else {
             System.out.println("You both are tied!");
+        }
+    }
+
+    private static void askToHit(Player dealer, Scanner scanner, Deck deck, Player player) {
+        if (dealer.getHand().getValue() < 16) {
+            System.out.println(dealer.getPlayer() + ", Do you want to hit? (yes/no): ");
+            String answer = scanner.nextLine().trim().toLowerCase();
+
+            if (answer.equals("yes") || answer.equals("y")) {
+                while (dealer.getHand().getValue() < 16) {
+                    System.out.println(dealer.getPlayer() + " is hitting!");
+                    System.out.println();
+                    dealer.getHand().deal(deck.deal());
+                }
+            } else if (answer.equals("no") || answer.equals("yes")) {
+                System.out.println(dealer.getPlayer() + " is not hitting!");
+                System.out.println();
+            }
+        }
+
+        if (player.getHand().getValue() < 16) {
+            System.out.println(player.getPlayer() + ", Do you want to hit? (yes/no): ");
+            String answer = scanner.nextLine().trim().toLowerCase();
+
+            if (answer.equals("yes") || answer.equals("y")) {
+                while (player.getHand().getValue() < 16) {
+                    System.out.println(player.getPlayer() + " is hitting!");
+                    System.out.println();
+                    player.getHand().deal(deck.deal());
+                }
+            } else if (answer.equals("no") || answer.equals("yes")) {
+                System.out.println(player.getPlayer() + " is not hitting!");
+                System.out.println();
+            }
         }
     }
 }
