@@ -17,6 +17,13 @@ public class App {
         System.out.println("Welcome, " + player1.getPlayer() + " and " + player2.getPlayer());
 
         Deck deck = new Deck();
-        System.out.println(deck.getSize());
+        deck.shuffle();
+
+        for (int i = 0; i < 2; i++) {
+            player1.getHand().deal(deck.deal());
+            player2.getHand().deal(deck.deal());
+        }
+
+
     }
 }

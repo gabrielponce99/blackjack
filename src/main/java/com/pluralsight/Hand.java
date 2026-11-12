@@ -32,4 +32,17 @@ public class Hand {
 
         return value;
     }
+
+    @Override
+    public String toString() {
+        String result = "";
+
+        for (Card card : cards) {
+            card.flip();
+            result = result + card.getValue() + " of " + card.getSuit() + ", ";
+            card.flip();
+        }
+
+        return result;
+    }
 }

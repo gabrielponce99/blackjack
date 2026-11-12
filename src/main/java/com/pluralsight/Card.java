@@ -32,17 +32,14 @@ public class Card {
     }
 
     public int getPointValue() {
-        // TODO: this is your job (Blackjack, p. 95).
-        if (isFaceUp()) {
-            switch (value) {
-                case "A" -> value = "11";
-                case "Q", "J", "K" -> value = "10";
-                default -> value = value;
-            }
-            return Integer.parseInt(value);
-        } else {
+        if (!faceUp) {
             return 0;
         }
+        return switch (value) {
+            case "A" -> 11;
+            case "K", "Q", "J" -> 10;
+            default -> Integer.parseInt(value);
+        };
     }
 
     public boolean isFaceUp() {
