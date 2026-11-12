@@ -24,6 +24,11 @@ public class App {
             player2.getHand().deal(deck.deal());
         }
 
+        int value1 = player1.getHand().getValue();
+        int value2 = player2.getHand().getValue();
+
+        System.out.println(player1.getPlayer() + "'s hand: " + player1.getHand() + "value: " + value1);
+        System.out.println(player2.getPlayer() + "'s hand: " + player2.getHand() + "value: " + value2);
 
     }
 }
