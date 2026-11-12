@@ -30,5 +30,18 @@ public class App {
         System.out.println(player1.getPlayer() + "'s hand: " + player1.getHand() + "value: " + value1);
         System.out.println(player2.getPlayer() + "'s hand: " + player2.getHand() + "value: " + value2);
 
+        if (value1 > 21 && value2 > 21) {
+            System.out.println("Both are busted! No winner!");
+        } else if (value1 > 21) {
+            System.out.println(player2.getPlayer() + " is the winner!");
+        } else if (value2 > 21) {
+            System.out.println(player1.getPlayer() + " is the winner!");
+        } else if (value1 > value2) {
+            System.out.println(player1.getPlayer() + " is the winner with " + value1 + " value");
+        } else if (value2 > value1) {
+            System.out.println(player2.getPlayer() + " is the winner with " + value2 + " value");
+        } else {
+            System.out.println("You both are tied!");
+        }
     }
 }
